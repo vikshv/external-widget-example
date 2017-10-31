@@ -1,3 +1,10 @@
-<ul>
-  <li *ngFor="let message of messages">{{ message.data }} @ {{ message.origin }}</li>
-</ul>
+<h1>External widget example</h1>
+<div class="container">
+    <div>List of message from host</div>
+    <ul class="container__list">
+      <li *ngFor="let message of messages">{{ message.data }} @ {{ message.origin }}</li>
+    </ul>
+</div>
+<div>
+    <a target="_blank" rel="noopener" href="https://github.com/vikshv/external-widget-example">GitHub</a>
+</div>
