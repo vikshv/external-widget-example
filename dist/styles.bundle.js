@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "html,\r\nbody {\r\n    height: 100%;\r\n    margin: 0;\r\n}\r\n\r\nbody {\r\n    background-color: rgb(205, 220, 57);\r\n}\r\n\r\n.root {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: column;\r\n            flex-direction: column;\r\n    height: 100%;\r\n    margin: 0 8px;\r\n}\r\n", ""]);
+exports.push([module.i, "html,\r\nbody {\r\n    height: 100%;\r\n    margin: 0;\r\n}\r\n\r\n.root {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: column;\r\n            flex-direction: column;\r\n    height: 100%;\r\n    margin: 0 8px;\r\n}\r\n", ""]);
 
 // exports
 
