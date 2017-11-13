@@ -67,7 +67,6 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('OnInit', document.referrer, window.parent);
         this.event = {
             name: 'onAction',
             parameter: ''

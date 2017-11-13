@@ -18,8 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        console.log('OnInit', document.referrer, window.parent);
-
         this.event = {
             name: 'onAction',
             parameter: ''
