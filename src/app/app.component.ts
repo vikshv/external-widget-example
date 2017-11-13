@@ -1,11 +1,16 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import frameRPC from 'frame-rpc';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+    rpc: any;
+    event: any;
+    change: any;
     messages: Array<any>;
 
     constructor() {
@@ -13,18 +18,69 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('OnInit', window['alphaopen']);
+        console.log('OnInit', document.referrer, window.parent);
+
+        this.event = {
+            name: 'onAction',
+            parameter: ''
+        };
+
+        this.change = {
+            name: '',
+            parameter: ''
+        };
+
+        this.rpc = frameRPC(window, window.parent, document.referrer, {
+            update: (data) => {
+                this.messages.push({
+                    method: 'update',
+                    store: JSON.stringify(data.store)
+                });
+            }
+        });
     }
 
-    @HostListener('window:message', ['$event'])
-    onMessage(event) {
-        this.messages.push({
-            data: event.data,
-            origin: event.origin
-        });
-        
-        if (event.data === 'aoWidgetConnect') {
-            event.source.postMessage('connect', event.origin);
+    ngOnDestroy() {
+        if (this.rpc) {
+            this.rpc.destroy();
         }
+    }
+
+    onFocus() {
+        this._callRPC('onFocus');
+    }
+
+    onBlur() {
+        this._callRPC('onBlur');
+    }
+
+    storeData() {
+        this._callRPC('storeData', {
+            message: 'Hello!'
+        });
+    }
+
+    fireWidgetEvent() {
+        const { name, parameter } = this.event;
+        if (name) {
+            this._callRPC('fireWidgetEvent', {
+                name,
+                parameter
+            });
+        }
+    }
+
+    fireWidgetChangeEvent() {
+        const { name, parameter } = this.event;
+        if (name && parameter) {
+            this._callRPC('fireWidgetChangeEvent', {
+                name,
+                parameter
+            });
+        }
+    }
+
+    _callRPC(method, ...args) {
+        this.rpc && this.rpc.call(method, ...args);
     }
 }
