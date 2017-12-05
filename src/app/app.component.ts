@@ -69,7 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     fireWidgetChangeEvent() {
-        const { name, parameter } = this.event;
+        const { name, parameter } = this.change;
         if (name && parameter) {
             this._callRPC('fireWidgetChangeEvent', {
                 name,
