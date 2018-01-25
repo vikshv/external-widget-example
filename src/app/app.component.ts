@@ -28,12 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
             parameter: ''
         };
 
-        this.messages.push({
-            method: 'origin',
-            store: JSON.stringify(document.referrer)
-        });
-
-        this.rpc = frameRPC(window, window.parent, '*', {
+        this.rpc = frameRPC(window, window.parent, document.referrer || '*', {
             update: (data) => {
                 this.messages.push({
                     method: 'update',
