@@ -28,14 +28,16 @@ export class AppComponent implements OnInit, OnDestroy {
             parameter: ''
         };
 
-        this.rpc = frameRPC(window, window.parent, document.referrer, {
-            update: (data) => {
-                this.messages.push({
-                    method: 'update',
-                    store: JSON.stringify(data.store)
-                });
-            }
-        });
+        if (document.referrer) {
+            this.rpc = frameRPC(window, window.parent, document.referrer, {
+                update: (data) => {
+                    this.messages.push({
+                        method: 'update',
+                        store: JSON.stringify(data.store)
+                    });
+                }
+            });
+        }
     }
 
     ngOnDestroy() {
